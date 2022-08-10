@@ -155,13 +155,11 @@ struct formatter<
       -> decltype(ctx.out()) {
     auto out = ctx.out();
 
-    out = detail::write<Char>(out, "variant(");
     std::visit(
         [&](const auto& v) {
           out = detail::write_variant_alternative<Char>(out, v);
         },
         value);
-    *out++ = ')';
     return out;
   }
 };
